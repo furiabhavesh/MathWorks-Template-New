@@ -2,16 +2,12 @@ package org.agileindia.mathworks;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
 public class Filter {
     public static List<Integer> selectPerfect(List<Integer> numbers) {
-        List<Integer> perfectNumbers = new ArrayList<>();
-        for (Integer number : numbers) {
-            if (isPerfect(number)) {
-                perfectNumbers.add(number);
-            }
-        }
-        return perfectNumbers;
+        Predicate<Integer> predicate = Filter::isPerfect;
+        return select(numbers, predicate);
     }
 
     private static boolean isPerfect(int number) {
@@ -32,5 +28,28 @@ public class Filter {
             return sumOfFactors - number == number;
         }
         return false;
+    }
+
+    public static List<Integer> selectEven(List<Integer> numbers) {
+        Predicate<Integer> predicate = Filter::isEven;
+        return select(numbers, predicate);
+    }
+
+    private static boolean isEven(Integer number) {
+        return number % 2 == 0;
+    }
+
+    public static List<Integer> select(List<Integer> numbers, Predicate<Integer> predicate) {
+        List<Integer> filteredNumbers = new ArrayList<>();
+        for (Integer number : numbers) {
+            if(predicate.test(number)){
+                filteredNumbers.add(number);
+            }
+        }
+        return filteredNumbers;
+    }
+
+    public static List<Integer> selectEvenPerfect(List<Integer> numbers) {
+        return select(select(numbers, Filter::isPerfect), Filter::isEven);
     }
 }
