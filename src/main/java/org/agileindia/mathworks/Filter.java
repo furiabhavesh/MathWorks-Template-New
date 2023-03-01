@@ -33,12 +33,17 @@ public class Filter {
         return number % 2 == 0;
     }
 
-    public static List<Integer> select(List<Integer> numbers, Predicate<Integer> ... predicates) {
-        List<Integer> filteredNumbers = new ArrayList<>();
-        for (Integer number : numbers) {
-            if(predicates[0].test(number)){
-                filteredNumbers.add(number);
+    public static List<Integer> select(final List<Integer> numbers, Predicate<Integer> ... predicates) {
+        List<Integer> filteredNumbers = numbers;
+        List<Integer> temp;
+        for (Predicate<Integer> predicate: predicates){
+            temp = new ArrayList<>();
+            for (Integer number : filteredNumbers) {
+                if (predicate.test(number)) {
+                    temp.add(number);
+                }
             }
+            filteredNumbers = temp;
         }
         return filteredNumbers;
     }
