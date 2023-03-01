@@ -11,12 +11,7 @@ public class Filter {
 
     private static boolean isPerfect(int number) {
         if (number > 0) {
-            List<Integer> factors = factors(number);
-            // Sum of factors
-            int sumOfFactors = sum(factors);
-            // It is a perfect number if the difference between sum of factors and the
-            // number is equal to the number itself
-            return sumOfFactors - number == number;
+            return sum(factors(number)) - number == number;
         }
         return false;
     }
