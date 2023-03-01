@@ -10,10 +10,9 @@ public class Filter {
     public static final Predicate<Integer> PERFECT = Filter::isPerfect;
 
     private static boolean isPerfect(int number) {
-        if (number > 0) {
-            return sum(factors(number)) - number == number;
-        }
-        return false;
+        if (number <= 0)
+            return false;
+        return sum(factors(number)) - number == number;
     }
 
     private static int sum(List<Integer> numbers) {
