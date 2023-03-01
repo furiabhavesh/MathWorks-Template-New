@@ -9,10 +9,6 @@ public class Filter {
     public static final Predicate<Integer> EVEN = Filter::isEven;
     public static final Predicate<Integer> PERFECT = Filter::isPerfect;
 
-    public static List<Integer> selectPerfect(List<Integer> numbers) {
-        return select(numbers, PERFECT);
-    }
-
     private static boolean isPerfect(int number) {
         if (number > 0) {
             List<Integer> factors = new ArrayList<>();
@@ -33,10 +29,6 @@ public class Filter {
         return false;
     }
 
-    public static List<Integer> selectEven(List<Integer> numbers) {
-        return select(numbers, Filter::isEven);
-    }
-
     private static boolean isEven(Integer number) {
         return number % 2 == 0;
     }
@@ -49,10 +41,5 @@ public class Filter {
             }
         }
         return filteredNumbers;
-    }
-
-    public static List<Integer> selectEvenPerfect(List<Integer> numbers) {
-        List<Integer> perfectNumbers = select(numbers, Filter::isPerfect);
-        return select(perfectNumbers, EVEN);
     }
 }

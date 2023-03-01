@@ -15,7 +15,7 @@ public class FilterSpecs {
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6, 10, 28);
 
         //When
-        List<Integer> perfectNumbers = Filter.selectPerfect(numbers);
+        List<Integer> perfectNumbers = Filter.select(numbers, Filter.PERFECT);
 
         //Then
         assertThat(perfectNumbers, hasSize(2));
@@ -28,7 +28,7 @@ public class FilterSpecs {
         List<Integer> numbers = Arrays.asList(-2, -1, 0, 6);
 
         //When
-        List<Integer> primeNumbers = Filter.selectPerfect(numbers);
+        List<Integer> primeNumbers = Filter.select(numbers, Filter.PERFECT);
 
         //Then
         assertThat(primeNumbers, hasSize(1));
@@ -38,7 +38,7 @@ public class FilterSpecs {
     private void processAndAssertFilterEven(List<Integer> numbers, int expectedSize, List<Integer> expectedItems){
 
         //When
-        List<Integer> evenNumbers = Filter.selectEven(numbers);
+        List<Integer> evenNumbers = Filter.select(numbers, Filter.EVEN);
 
         //Then
         assertThat(evenNumbers, hasSize(expectedSize));
@@ -65,7 +65,7 @@ public class FilterSpecs {
     private void processAndAssertFilterEvenAndPerfect(List<Integer> numbers, int expectedSize, List<Integer> expectedItems){
 
         //When
-        List<Integer> evenPerfectNumbers = Filter.selectEvenPerfect(numbers);
+        List<Integer> evenPerfectNumbers = Filter.select(numbers, Filter.PERFECT, Filter.EVEN);
 
         //Then
         assertThat(evenPerfectNumbers, hasSize(expectedSize));
