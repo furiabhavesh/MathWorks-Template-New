@@ -41,10 +41,10 @@ public class Filter {
         return number % 2 == 0;
     }
 
-    public static List<Integer> select(List<Integer> numbers, Predicate<Integer> predicate) {
+    public static List<Integer> select(List<Integer> numbers, Predicate<Integer> ... predicates) {
         List<Integer> filteredNumbers = new ArrayList<>();
         for (Integer number : numbers) {
-            if(predicate.test(number)){
+            if(predicates[0].test(number)){
                 filteredNumbers.add(number);
             }
         }
