@@ -9,10 +9,31 @@ public class Filter {
     public static final Predicate<Integer> EVEN = Filter::isEven;
     public static final Predicate<Integer> PERFECT = Filter::isPerfect;
 
+    @SafeVarargs
+    public static List<Integer> select(final List<Integer> numbers, Predicate<Integer> ... predicates) {
+        List<Integer> filteredNumbers = numbers;
+        List<Integer> temp;
+        for (Predicate<Integer> predicate: predicates){
+            temp = new ArrayList<>();
+            for (Integer number : filteredNumbers) {
+                if (predicate.test(number)) {
+                    temp.add(number);
+                }
+            }
+            filteredNumbers = temp;
+        }
+        return filteredNumbers;
+    }
+
     private static boolean isPerfect(int number) {
         if (number <= 0)
             return false;
+
         return sum(factors(number)) - number == number;
+    }
+
+    private static boolean isEven(Integer number) {
+        return number % 2 == 0;
     }
 
     private static int sum(List<Integer> numbers) {
@@ -31,24 +52,5 @@ public class Filter {
             }
         }
         return factors;
-    }
-
-    private static boolean isEven(Integer number) {
-        return number % 2 == 0;
-    }
-
-    public static List<Integer> select(final List<Integer> numbers, Predicate<Integer> ... predicates) {
-        List<Integer> filteredNumbers = numbers;
-        List<Integer> temp;
-        for (Predicate<Integer> predicate: predicates){
-            temp = new ArrayList<>();
-            for (Integer number : filteredNumbers) {
-                if (predicate.test(number)) {
-                    temp.add(number);
-                }
-            }
-            filteredNumbers = temp;
-        }
-        return filteredNumbers;
     }
 }
