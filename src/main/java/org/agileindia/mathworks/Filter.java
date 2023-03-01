@@ -13,15 +13,20 @@ public class Filter {
         if (number > 0) {
             List<Integer> factors = factors(number);
             // Sum of factors
-            int sumOfFactors = 0;
-            for (Integer i : factors) {
-                sumOfFactors += i;
-            }
+            int sumOfFactors = sum(factors);
             // It is a perfect number if the difference between sum of factors and the
             // number is equal to the number itself
             return sumOfFactors - number == number;
         }
         return false;
+    }
+
+    private static int sum(List<Integer> numbers) {
+        int sum = 0;
+        for (Integer number : numbers) {
+            sum += number;
+        }
+        return sum;
     }
 
     private static List<Integer> factors(int number) {
