@@ -11,12 +11,7 @@ public class Filter {
 
     private static boolean isPerfect(int number) {
         if (number > 0) {
-            List<Integer> factors = new ArrayList<>();
-            for (int i = 1; i <= number; i++) {
-                if (number % i == 0) {
-                    factors.add(i);
-                }
-            }
+            List<Integer> factors = factors(number);
             // Sum of factors
             int sumOfFactors = 0;
             for (Integer i : factors) {
@@ -27,6 +22,16 @@ public class Filter {
             return sumOfFactors - number == number;
         }
         return false;
+    }
+
+    private static List<Integer> factors(int number) {
+        List<Integer> factors = new ArrayList<>();
+        for (int i = 1; i <= number; i++) {
+            if (number % i == 0) {
+                factors.add(i);
+            }
+        }
+        return factors;
     }
 
     private static boolean isEven(Integer number) {
