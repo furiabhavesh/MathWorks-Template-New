@@ -25,9 +25,9 @@ public class Filter {
 
     private static List<Integer> factors(int number) {
         List<Integer> factors = new ArrayList<>();
-        for (int i = 1; i <= number; i++) {
-            if (number % i == 0) {
-                factors.add(i);
+        for (int divisor = 1; divisor <= number; divisor++) {
+            if (number % divisor == 0) {
+                factors.add(divisor);
             }
         }
         return factors;
