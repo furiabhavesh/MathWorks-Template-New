@@ -5,9 +5,12 @@ import java.util.List;
 import java.util.function.Predicate;
 
 public class Filter {
+
+    public static final Predicate<Integer> EVEN = Filter::isEven;
+    public static final Predicate<Integer> PERFECT = Filter::isPerfect;
+
     public static List<Integer> selectPerfect(List<Integer> numbers) {
-        Predicate<Integer> predicate = Filter::isPerfect;
-        return select(numbers, predicate);
+        return select(numbers, PERFECT);
     }
 
     private static boolean isPerfect(int number) {
@@ -31,8 +34,7 @@ public class Filter {
     }
 
     public static List<Integer> selectEven(List<Integer> numbers) {
-        Predicate<Integer> predicate = Filter::isEven;
-        return select(numbers, predicate);
+        return select(numbers, Filter::isEven);
     }
 
     private static boolean isEven(Integer number) {
@@ -50,6 +52,7 @@ public class Filter {
     }
 
     public static List<Integer> selectEvenPerfect(List<Integer> numbers) {
-        return select(select(numbers, Filter::isPerfect), Filter::isEven);
+        List<Integer> perfectNumbers = select(numbers, Filter::isPerfect);
+        return select(perfectNumbers, EVEN);
     }
 }
